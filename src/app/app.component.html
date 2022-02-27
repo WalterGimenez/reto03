@@ -4,10 +4,29 @@
 <p>{{ title }}</p>
 <p>Resultado de (5 - 2) = {{ 5 - 2 }}</p>
 
-<img src="{{ url }}" alt="dibujo Optimus Prime">
-<p>Mi nombre es {{ name }}</p>
+<img src="{{ url }}" alt="dibujo Optimus Prime"><br>
+<p *ngIf="name">Mi nombre es {{ name }}</p>
 <input type ="text" [(ngModel)] = "name" placeholder="Ingrese un nombre">
 
+
 <ul *ngFor="let ciudad of ciudades">
-    <li>{{ciudad}}</li>
+    <li [ngClass]="'seleccionado azul'">{{ciudad}}</li>
 </ul>
+
+
+<ul *ngFor="let ciudad of ciudades">
+    <li [ngClass]="{'seleccionado': ciudad === 'Misiones', 'azul':ciudad != 'Misiones' }">{{ciudad}}</li>
+</ul>
+
+<ul *ngFor="let ciudad of ciudades">
+    <li [ngStyle]="{'color': 'red', 'background-color': ciudad === 'Chaco'? 'noseleccionado' : 'green' }">{{ciudad}}</li>
+</ul>
+
+
+<ul *ngFor="let ciudad of ciudades">
+    <li (click)="ciudadClick(ciudad)" [ngClass]="{'seleccionado': ciudad === seleccion, 'noseleccionado': ciudad === noseleccion }">{{ciudad}}</li>
+</ul>
+<div *ngIf ="seleccion">
+    <p >La ciudad seleccionada es: {{ seleccion }}</p>
+    <button  (click)="borraSeleccion()">Borrar Selección</button>
+</div>
